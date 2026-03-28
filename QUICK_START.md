@@ -1,61 +1,46 @@
-## Axoryn – Quick Start
-
-This guide shows the fastest way to run Axoryn locally on Windows.
+# 🚀 VideoTube Quick Start Guide
+Welcome to VideoTube! This guide will walk you through the fastest and easiest way to properly set up the full-stack MERN application locally on your machine.
 
 ---
 
-## 1. Requirements
-
+## 🛑 1. Prerequisites
+Before you begin, ensure you have the following installed and set up:
 - **Node.js**: v18+ (LTS recommended)
-- **MongoDB**: Local server or MongoDB Atlas account
-- **Cloudinary** (optional but recommended): Account for media uploads
+- **MongoDB**: A running local server (MongoDB Community) OR a [MongoDB Atlas](https://www.mongodb.com/atlas) cloud account.
+- **Cloudinary**: A free [Cloudinary](https://cloudinary.com/) account is required to host image uploads, avatars, and video streams.
 
 ---
 
-## 2. Clone & Open Project
+## ⚙️ 2. Environment Setup
 
-```bash
-git clone https://github.com/Yash2204V/Axoryn.git
-cd Axoryn
-```
+The application strictly requires environment variables for both the backend and frontend to function securely.
 
-Or, if you already have the folder:
-
-```bash
-cd "D:\student\vs code\y1\Axoryn-main"
-```
-
----
-
-## 3. Environment Variables
-
-### 3.1 Backend `.env`
-
-In the `backend` folder, create a file named `.env`:
+### Backend `.env`
+Navigate into the `backend/` directory and create a file exactly named `.env`. Copy the following template and replace the placeholder values with your real credentials:
 
 ```env
+# Server Configuration
 PORT=8000
 CORS_ORIGIN=http://localhost:5173
 
-MONGODB_URI=mongodb://127.0.0.1:27017
+# Database Connection
+# IMPORTANT: Provide only the cluster/host URL. The actual DB Name (videotube) is read from src/constants.js!
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.0qhqpqi.mongodb.net
 
-ACCESS_TOKEN_SECRET=your-access-secret
+# Security & Authentications
+ACCESS_TOKEN_SECRET=generate_any_long_secure_random_string_here
 ACCESS_TOKEN_EXPIRY=1d
-REFRESH_TOKEN_SECRET=your-refresh-secret
+REFRESH_TOKEN_SECRET=generate_another_long_secure_random_string_here
 REFRESH_TOKEN_EXPIRY=10d
 
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-ō
+# Media Storage (Cloudinary)
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-> Replace the `ACCESS_*`, `REFRESH_*`, and `CLOUDINARY_*` values with your own secure values.
-
-### 3.2 Frontend `.env`
-
-In the `frontend` folder, create a file named `.env`:
+### Frontend `.env`
+Navigate into the `frontend/` directory and create a file named `.env`:
 
 ```env
 VITE_BACKEND_URL=http://localhost:8000
@@ -64,54 +49,53 @@ VITE_FRONTEND_URL=http://localhost:5173
 
 ---
 
-## 4. Install Dependencies
+## 📦 3. Install Dependencies
 
-From the project root:
+You need to install the Node modules for the root directory as well as both sub-folders. Open your terminal at the root of the project:
 
 ```bash
-cd "D:\student\vs code\y1\Axoryn-main"
-
-# Root dependencies (concurrently)
+# 1. Install root dependencies (used for running both servers concurrently)
 npm install
 
-# Backend dependencies
+# 2. Install backend dependencies
 cd backend
 npm install
 
-# Frontend dependencies
+# 3. Install frontend dependencies
 cd ../frontend
 npm install
 ```
 
 ---
 
-## 5. Run the App (Development)
+## 🏃 4. Run the Platform
 
-From the **project root**:
+With your environment variables saved and dependencies installed, you can launch the entire stack with a single command!
+
+Navigate back to the **project root folder**, and run:
 
 ```bash
-cd "D:\student\vs code\y1\Axoryn-main"
 npm run dev
 ```
 
-This will start:
+**Success!** This command will fire up both servers:
+- **Backend API Server**: running on `http://localhost:8000`
+- **Frontend App (Vite)**: running on `http://localhost:5173`
 
-- **Backend API** on `http://localhost:8000`
-- **Frontend (Vite)** on `http://localhost:5173`
-
-Open your browser at: `http://localhost:5173`
+You can now open your browser and navigate to `http://localhost:5173` to explore VideoTube!
 
 ---
 
-## 6. Common Issues
+## 🛠️ 5. Troubleshooting Common Issues
 
-- **MongoDB connection error**  
-  - Make sure MongoDB is running and `MONGODB_URI` is correct.
+* **Blank Screen / Videos Not Loading**
+  Make sure your backend server is actually running and connected to MongoDB. If it says `MONGODB connection FAILED`, double-check the username and password in your `MONGODB_URI`.
+  
+* **Missing Videos / Database Mismatch**
+  Ensure that `backend/src/constants.js` contains `export const DB_NAME = "videotube"`. If this name mismatches your actual database, the backend will query an empty shadow database!
 
-- **CORS errors**  
-  - Ensure `CORS_ORIGIN` in `backend/.env` matches your frontend URL exactly.
+* **CORS Errors in Browser Console**
+  Ensure the `CORS_ORIGIN` inside `backend/.env` is set exactly to your frontend URL (e.g., `http://localhost:5173`) with absolutely **no trailing slashes** at the end.
 
-- **Cloudinary upload errors**  
-  - Check Cloudinary credentials and that the account is active.
-
-
+* **"Failed to Upload" errors when posting videos**
+  This almost always means your `CLOUDINARY_API_KEY` or `CLOUDINARY_API_SECRET` are incorrect, expired, or you've accidentally left a space in the `.env` file string. Double check your Cloudinary dashboard.

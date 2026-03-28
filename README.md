@@ -1,4 +1,4 @@
-# youtube-clone 🎥
+# VideoTube 🎥 | A Modern YouTube Clone
 
 **A Full-Stack YouTube-Inspired Video Sharing Platform**
 
@@ -60,7 +60,7 @@ This is a modern, feature-rich multimedia platform that brings the core function
 ## 📁 Project Structure
 
 ```
-Axoryn/
+VideoTube/
 ├── backend/                    # Node.js/Express API
 │   ├── src/
 │   │   ├── controllers/       # Route handlers
@@ -87,7 +87,7 @@ Axoryn/
 - **Content**: `/api/v1/playlists`, `/api/v1/tweets` - Content organization
 - **Analytics**: `/api/v1/dashboard` - Creator insights
 
-## 🌟 What Makes  Special
+## 🌟 What Makes VideoTube Special
 
 - **Production-Ready Architecture** - Scalable backend with proper error handling
 - **Modern UI/UX** - Intuitive design inspired by the best video platforms
