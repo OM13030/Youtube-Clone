@@ -14,7 +14,7 @@ function Logo() {
         </svg>
       </div>
       <span className="text-xl font-bold tracking-tighter text-zinc-900 dark:text-white flex items-center">
-        YouTube
+        VideoTube
       </span>
     </div>
   )

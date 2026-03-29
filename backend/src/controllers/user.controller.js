@@ -296,10 +296,8 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
     //TODO: delete old image - assignment
     const user = await User.findById(req.user._id).select("-password");
 
-    const response = await deleteOnCloudinary(user.avatar);
-
-    if (!response) {
-        throw new ApiError(400, "Error while deleting the avatar")
+    if (user.avatar) {
+        await deleteOnCloudinary(user.avatar);
     }
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
@@ -328,11 +326,10 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     //TODO: delete old image - assignment
     const user = await User.findById(req.user._id).select("-password");
 
-    const response = await deleteOnCloudinary(user.coverImage);
-
-    if (!response) {
-        throw new ApiError(400, "Error while deleting the cover image")
+    if (user.coverImage) {
+        await deleteOnCloudinary(user.coverImage);
     }
+    
 
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 

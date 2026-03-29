@@ -8,7 +8,7 @@ function Footer() {
         <div className="mr-4 w-12 shrink-0 sm:w-16">
           <Logo />
         </div>
-        <p className="text-sm text-gray-400 dark:text-gray-500">©{new Date().getFullYear()} Parth. All rights reserved.</p>
+        <p className="text-sm text-gray-400 dark:text-gray-500">©{new Date().getFullYear()} om. All rights reserved.</p>
       </div>
     </footer>
   )
